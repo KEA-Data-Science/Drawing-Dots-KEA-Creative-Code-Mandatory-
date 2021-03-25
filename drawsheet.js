@@ -48,7 +48,7 @@ function setup() {
     drawingCursor = new GameObject("Pen", {
         drawing : false,
         update: function (gameObject) {
-            if(drawingCursor.qualia.drawing){
+            if(drawingCursor.qualia.drawing && GAMEINPUT.mouse.y<ctx.canvas.height){
                 dots.push({
                     x: GAMEINPUT.mouse.x,
                     y: GAMEINPUT.mouse.y,
