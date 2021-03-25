@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <head>
 
     <!-- Styling Imports -->
@@ -43,17 +42,16 @@
 
 <body>
     <canvas id="canvas"></canvas>
-    <div class="ml-5">
-        Draw dots: cursor position + hold 
-        <a href="https://www.youtube.com/watch?v=st6-DgWeuos" target="_blank">any key.</a>
+    <div class="ml-5 pt-0">
+        <span class="font-weight-bolder">Dot Drawing Options</span>
         
-        <label class="ml-5" for="colorInput" >Color:
+        <label class="ml-3" for="colorInput" >Color:
             <input class="m" type="color" id="colorInput" value="#ffffff">
         </label>
-        <label class="ml-5" for="dotSizeInput">Dot Size:
+        <label class="ml-3" for="dotSizeInput">Dot Size:
             <input type="range" id="dotSizeInput" min="1" max="42" class="slider" value="12">
         </label>
-        <label class="ml-5" for="animationtypeX">Animation type:<span class="ml-2">X-AXIS:</span>
+        <label class="ml-3" for="animationtypeX">Animation Type:<span class="ml-2">X-AXIS:</span>
             <select name="animationtypeselect" id="animationtypeX">
                 <option value="noani">No Animation</option>
                 <option value="sin">Math.sin</option>
@@ -69,7 +67,8 @@
                 <option value="tan">Math.tan</option>                
             </select>           
         </label>
-        <button class="btn" onclick="cleanSheet()">Clean Sheet</button>
+        <span class="btn font-weight-bolder" onclick="cleanSheet()">Clean Sheet</span>
+        <span class="btn font-weight-bolder" onclick="exportPoints()">Export</span>
     </div>
 </body>
 

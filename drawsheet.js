@@ -133,3 +133,14 @@ function cleanSheet(){
 
     dots.splice(0,dots.length)
 }
+
+function exportPoints(){
+
+    dotString = ""
+
+    for (i  = 0;i< dots.length; i++) {
+      dotString =  dotString.concat(dots[i].color).concat(";")
+    }
+
+    console.log("Export Alpha: " + dotString)
+}
