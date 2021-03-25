@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+
+    <!-- Styling Imports -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: lightblue;
+        }
+
+    </style>
+
+    <!-- External Libraries -->
+    <script src="lib/matterjs/matter.js"></script>
+    <!-- imports are ordered by the principle of minimal dependency -->
+    <script src="core/heart.js"></script>
+    <script src="core/renderer2D.js"></script>
+    <script src="core/gameobject.js"></script>
+    <script src="core/position.js"></script>
+    <script src="core/gamelayers.js"></script>
+    <script src="core/scenemanager.js"></script>
+    <script src="core/gameinput.js"></script>
+    <script src="core/gameloop.js"></script>
+    <script src="core/globjects.js"></script>
+    <!-- actual square drawer -->
+    <script src="drawsheet.js"></script>
+
+    <title>Draw Sheet</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="ml-5">
+        Draw dots: cursor position + hold 
+        <a href="https://www.youtube.com/watch?v=st6-DgWeuos" target="_blank">any key.</a>
+        
+        <label class="ml-5" for="colorInput" >Color:
+            <input class="m" type="color" id="colorInput" value="#ffffff">
+        </label>
+        <label class="ml-5" for="dotSizeInput">Dot Size:
+            <input type="range" id="dotSizeInput" min="1" max="42" class="slider" value="12">
+        </label>
+        <label class="ml-5" for="animationtypeX">Animation type:<span class="ml-2">X-AXIS:</span>
+            <select name="animationtypeselect" id="animationtypeX">
+                <option value="noani">No Animation</option>
+                <option value="sin">Math.sin</option>
+                <option value="cos">Math.cos</option>
+                <option value="tan">Math.tan</option>                
+            </select>           
+        </label>
+        <label class="ml-2" for="animationtypeY">Y-AXIS:
+            <select name="animationtypeselect" id="animationtypeY">
+                <option value="noani">No Animation</option>
+                <option value="sin">Math.sin</option>
+                <option value="cos">Math.cos</option>
+                <option value="tan">Math.tan</option>                
+            </select>           
+        </label>
+        <button class="btn" onclick="cleanSheet()">Clean Sheet</button>
+    </div>
+</body>
+
+</html>
