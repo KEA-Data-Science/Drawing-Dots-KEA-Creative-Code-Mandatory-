@@ -1,24 +1,25 @@
 let ctx
-const SCENEMANAGER = new SceneManager()
+const SCENEMANAGER = new SceneManager() // manages all objects in scene / canvas / sheet
 
-const dots = []
-let color
-let thickness = 5
+const dots = [] // dots that are drawn
 
-let colorInput
-let dotSize
-let animationTypeInputX
-let animationTypeInputY
+let colorInput // references colorInput element
+let dotSize // references dotSizeInput element
+let animationTypeInputX // references a..X element
+let animationTypeInputY // references a..Y element
 
 let numberOfDotsDrawn = 0
 
-let title
-let drawingCursor
-let sheetDrawer
-let signature
+let title // GameObject object, displays title
+let drawingCursor // GO object, places dots on the sheet
+let sheetDrawer // GO object, draws dots on the sheet
+let signature // GO object, display name in corner
 
-window.addEventListener("load", function () { setup() })
+window.addEventListener("load", function () {
+    setup()
+})
 
+// initialize all variables and start scene
 function setup() {
     let canvas = document.getElementById("canvas")
     ctx = canvas.getContext("2d")
@@ -30,8 +31,6 @@ function setup() {
 
     CANVASDEFAULTS.sizePropertionOfInnerWindowY = 0.9
     CANVASDEFAULTS.backgroundFillStyle = "black"
-
-
 
     // this GO draws the score
     title = new GameObject("Drawing Sheet",
@@ -46,9 +45,9 @@ function setup() {
 
     // this GO 'places' dots on the canvas space
     drawingCursor = new GameObject("Pen", {
-        drawing : false,
+        drawing: false,
         update: function (gameObject) {
-            if(drawingCursor.qualia.drawing && GAMEINPUT.mouse.y<ctx.canvas.height){
+            if (drawingCursor.qualia.drawing && GAMEINPUT.mouse.y < ctx.canvas.height) {
                 dots.push({
                     x: GAMEINPUT.mouse.x,
                     y: GAMEINPUT.mouse.y,
@@ -60,18 +59,16 @@ function setup() {
                 numberOfDotsDrawn++
             }
         },
-        playerInput: function (mousedownEvent) {
-           drawingCursor.qualia.drawing = true
+        playerInput: function (e) {
+            drawingCursor.qualia.drawing = true
         },
-        mouseUp: function (event){
+        mouseUp: function (e) {
             drawingCursor.qualia.drawing = false
         }
     })
-
-    document.addEventListener("mouseup",drawingCursor.qualia.mouseUp)
-
-    SCENEMANAGER.includeInScene(drawingCursor, 0)
+    document.addEventListener("mouseup", drawingCursor.qualia.mouseUp)
     GAMEINPUT.subscribeToMouseDown(drawingCursor)
+    SCENEMANAGER.includeInScene(drawingCursor, 0)
 
     // this GO draws the dots
     sheetDrawer = new GameObject("SheetDrawer",
@@ -92,7 +89,7 @@ function setup() {
         })
     SCENEMANAGER.includeInScene(sheetDrawer, 0)
 
-    // this GO draws the score
+    // this GO draws the signature
     signature = new GameObject("Who made it",
         {
             update: function (gameObject) {
@@ -106,11 +103,13 @@ function setup() {
     SCENEMANAGER.includeInScene(signature, 5)
 
 
-
     GAMEINPUT.startDetectingInput()
     SCENEMANAGER.GAMELOOP.doLoop()
 }
 
+// returns a number based on dotSize that is
+// multiplied by the return value of the functionChoice (sin,cos,tan),
+// itself applied to the number of seconds since the beginning of the scene.
 function calcSize(dotSize, functionChoice) {
 
     switch (functionChoice) {
@@ -127,19 +126,21 @@ function calcSize(dotSize, functionChoice) {
     }
 }
 
-// removes 'drawn' dots from canvas
-function cleanSheet(){
+// removes 'drawn' dots from canvas / gives a clean sheet
+function cleanSheet() {
     numberOfDotsDrawn = 0
-
-    dots.splice(0,dots.length)
+    dots.splice(0, dots.length)
 }
 
-function exportPoints(){
-
+// Skimpy proof of concept for another time; the basic idea is to
+// export all dots in sequence, representing their qualities as a string.
+// At a later time, that string can be 'loaded' to reproduce the original.
+// AT CURRENT: only exports the color of each dot to the console log.
+function exportPoints() {
     dotString = ""
 
-    for (i  = 0;i< dots.length; i++) {
-      dotString =  dotString.concat(dots[i].color).concat(";")
+    for (i = 0; i < dots.length; i++) {
+        dotString = dotString.concat(dots[i].color).concat(";")
     }
 
     console.log("Export Alpha: " + dotString)
